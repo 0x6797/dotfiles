@@ -1,0 +1,13 @@
+---
+# tasks file for docker
+- name: docker | Check if installing docker.
+  shell: type -P docker
+  register: docker_installed
+  ignore_errors: yes
+
+- name: docker | Install tasks for Amazon Linux 2
+  include: amazonlinux2.yaml
+  when:
+    - docker_installed.stdout == ""
+    - ansible_distribution == "Amazon"
+    - ansible_distribution_version == "2"

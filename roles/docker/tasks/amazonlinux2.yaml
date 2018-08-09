@@ -1,0 +1,20 @@
+---
+# tasks file for Amazon Linux 2
+- name: docker | Ensure existing Docker.
+  yum:
+    name: docker
+    state: present
+  become: yes
+
+- name: docker | Ensure user joins group Docker.
+  user:
+    name: "{{ ansible_user }}"
+    append: yes
+    groups: docker
+  become: yes
+
+- name: docker | Ensure starting docker service.
+  service:
+    name: docker
+    state: started
+  become: yes

@@ -1,0 +1,38 @@
+---
+# tasks file for nvim
+- name: nvim | Check if installing nvim.
+  shell: type -P nvim
+  register: nvim_installed
+  ignore_errors: yes
+
+- name: nvim | Install tasks for Amazon Linux 2
+  include: amazonlinux2.yaml
+  when:
+    - nvim_installed.stdout == ""
+    - ansible_distribution == "Amazon"
+    - ansible_distribution_version == "2"
+
+- name: nvim | Ensure existing ~/.config direcotry.
+  file:
+    path: ~/.config/nvim
+    state: directory
+
+- name: nvim | Configure init.vim.
+  file:
+    src: "{{ role_path }}/files/init.vim"
+    dest: ~/.config/nvim/init.vim
+    force: yes
+    state: link
+
+- name: nvim | Configure nvim plugins.
+  file:
+    src: "{{ role_path }}/files/vimfiles"
+    dest: ~/.vim
+    force: yes
+    state: link
+
+- name: nvim | Ensure insalling python3 neovim plugin.
+  pip:
+    name: neovim
+    executable: pip3
+    extra_args: --user

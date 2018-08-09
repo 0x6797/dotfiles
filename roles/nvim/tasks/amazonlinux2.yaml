@@ -1,0 +1,41 @@
+---
+# tasks file for Amazon Linux 2
+- name: nvim | Ensure existing Development tools (YUM).
+  yum:
+    name: "@Development tools"
+    state: present
+  become: yes
+
+- name: nvim | Ensure existing build packages.
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - cmake
+    - python3-devel
+    - python3-pip
+    - git
+  become: yes
+
+- name: nvim | Make a temporary directory.
+  tempfile:
+    state: directory
+  register: directory
+
+- name: nvim | Clone source codes from GitHub.
+  git:
+    repo: https://github.com/neovim/neovim.git
+    dest: "{{ directory.path }}"
+    update: no
+
+- name: nvim | Build neovim.
+  make:
+    chdir: "{{ directory.path }}"
+    params:
+      CMAKE_BUILD_TYPE: Release
+
+- name: nvim | Install nvim.
+  make:
+    chdir: "{{ directory.path }}"
+    target: install
+  become: yes

@@ -1,0 +1,181 @@
+# -------------------------------------
+#  dein.vim
+# -------------------------------------
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# -------------------------------------
+#  vimproc
+# -------------------------------------
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+hook_post_update = '''
+  if dein#util#_is_windows()
+    let cmd = 'tools\\update-dll-mingw'
+  elseif dein#util#_is_cygwin()
+    let cmd = 'make -f make_cygwin.mak'
+  elseif executable('gmake')
+    let cmd = 'gmake'
+  else
+    let cmd = 'make'
+  endif
+  let g:dein#plugin.build = cmd
+'''
+
+# -------------------------------------
+#  deoplete.nvim
+# -------------------------------------
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+on_i = 1
+hook_post_update = '''
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
+  dein#add('Shougo/neco-vim')
+  dein#add('Shougo/neco-syntax')
+  dein#add('ujihisa/neco-look')
+  let g:deoplete#enable_at_startup = 1
+'''
+
+# -------------------------------------
+#  NERDTree
+# -------------------------------------
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+  autocmd VimEnter * execute 'NERDTree'
+'''
+
+# -------------------------------------
+#  editorconfig
+# -------------------------------------
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
+# -------------------------------------
+#  vim-surround
+# -------------------------------------
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+# -------------------------------------
+#  Easy Motion
+# -------------------------------------
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+hook_add = '''
+  nmap s <Plug>(easymotion-s2)
+  xmap s <Plug>(easymotion-s2)
+  omap s <Plug>(easymotion-s2)
+'''
+
+# -------------------------------------
+#  vim-easy-align
+# -------------------------------------
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+hook_add = '''
+  " Select text in visual mode, and call easy-align to format text.
+  " (e.g. vip<Enter>)
+  vmap <Enter> <Plug>(EasyAlign)
+  " Start interactive EasyAlign in visual mode (e.g. vipga)
+  xmap ga <Plug>(EasyAlign)
+  " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+  nmap ga <Plug>(EasyAlign)
+'''
+
+# -------------------------------------
+#  indentLine
+# -------------------------------------
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_add = '''
+  let g:indentLine_faster = 1
+  nmap <silent><Leader>i :<C-u>IndentLinesToggle<CR>
+'''
+
+# -------------------------------------
+#  lightline
+# -------------------------------------
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  syntax enable
+  set laststatus=2
+  set t_Co=256
+  set background=dark
+  let g:lightline = {
+        \ 'colorscheme': 'solarized',
+        \ 'mode_map': {'c': 'NORMAL'},
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+        \ },
+        \ 'component_function': {
+        \   'modified': 'LightlineModified',
+        \   'readonly': 'LightlineReadonly',
+        \   'fugitive': 'LightlineFugitive',
+        \   'filename': 'LightlineFilename',
+        \   'fileformat': 'LightlineFileformat',
+        \   'filetype': 'LightlineFiletype',
+        \   'fileencoding': 'LightlineFileencoding',
+        \   'mode': 'LightlineMode'
+        \ }
+        \ }
+  function! LightlineModified()
+    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+  endfunction
+  function! LightlineReadonly()
+    return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+  endfunction
+  function! LightlineFilename()
+    return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+  endfunction
+  function! LightlineFugitive()
+    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+      return fugitive#head()
+    else
+      return ''
+    endif
+  endfunction
+  function! LightlineFileformat()
+    return winwidth(0) > 70 ? &fileformat : ''
+  endfunction
+  function! LightlineFiletype()
+    return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+  endfunction
+  function! LightlineFileencoding()
+    return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+  endfunction
+  function! LightlineMode()
+    return winwidth(0) > 60 ? lightline#mode() : ''
+  endfunction
+  " }}}
+'''
+
+# ブランチやタグを指定したいとき
+# [[plugins]]
+# repo = 'delphinus35/typescript-vim'
+# rev  = 'colorize-template-strings'
+
+# 特定の条件で読み込みたいとき
+# [[plugins]]
+# repo = 'elzr/vim-json'
+# if   = '''! has('kaoriya')'''
+
+# 依存関係を指定したいとき
+# [[plugins]]
+# repo    = 'vim-airline/vim-airline'
+# depends = ['vim-airline-themes']
+
+# 依存関係を指定したからと言って、自動でインストールはされない（ここは NeoBundle と違う）
+# [[plugins]]
+# repo = 'vim-airline/vim-airline-themes'
+
