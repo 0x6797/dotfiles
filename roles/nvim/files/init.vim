@@ -75,6 +75,11 @@ filetype indent on
 syntax on
 
 " -------------------------------------
+"  Set SPACE key to <Leader>
+" -------------------------------------
+let mapleader = "\<Space>"
+
+" -------------------------------------
 "  Set Mouse enabled
 " -------------------------------------
 set mouse=a
