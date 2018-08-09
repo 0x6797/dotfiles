@@ -1,0 +1,23 @@
+---
+# tasks file for Ubuntu
+- name: nvim | Ensure existing software-properties-common (APT)
+  apt:
+    name: "software-properties-common"
+    state: present
+  become: yes
+
+- name: nvim | Ensure existing APT repository. (APT)
+  apt_repository:
+    repo: ppa:neovim-ppa/stable
+  become: yes
+
+- name: nvim | Update repository. (APT)
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: nvim | Ensure installing nvim. (APT)
+  apt:
+    name: neovim
+    state: present
+  become: yes

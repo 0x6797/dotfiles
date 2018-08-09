@@ -12,6 +12,12 @@
     - ansible_distribution == "Amazon"
     - ansible_distribution_version == "2"
 
+- name: nvim | Install tasks for Ubuntu
+  include: ubuntu.yaml
+  when:
+    - nvim_installed.stdout == ""
+    - ansible_distribution == "Ubuntu"
+
 - name: nvim | Ensure existing ~/.config direcotry.
   file:
     path: ~/.config/nvim
