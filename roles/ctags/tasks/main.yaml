@@ -1,7 +1,7 @@
 ---
 # tasks file for ctags
 - name: ctags | Check if installing ctags.
-  shell: type -P ctags
+  shell: which ctags
   register: ctags_installed
   ignore_errors: yes
 
@@ -11,3 +11,9 @@
     - ctags_installed.stdout == ""
     - ansible_distribution == "Amazon"
     - ansible_distribution_version == "2"
+
+- name: ctags | Install tasks for Ubuntu.
+  include: ubuntu.yaml
+  when:
+    - ctags_installed.stdout == ""
+    - ansible_distribution == "Ubuntu"

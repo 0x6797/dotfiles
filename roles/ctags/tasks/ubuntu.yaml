@@ -1,0 +1,7 @@
+---
+# tasks file for Ubuntu
+- name: ctags | Ensure existing ctags. (APT)
+  apt:
+    name: exuberant-ctags
+    state: present
+  become: yes

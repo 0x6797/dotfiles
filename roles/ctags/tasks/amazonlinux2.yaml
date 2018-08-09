@@ -1,6 +1,6 @@
 ---
 # tasks file for Amazon Linux 2
-- name: ctags | Ensure existing ctags.
+- name: ctags | Ensure existing ctags. (YUM)
   yum:
     name: ctags
     state: present
