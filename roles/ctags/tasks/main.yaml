@@ -1,0 +1,13 @@
+---
+# tasks file for ctags
+- name: ctags | Check if installing ctags.
+  shell: type -P ctags
+  register: ctags_installed
+  ignore_errors: yes
+
+- name: ctags | Install tasks for Amazon Linux 2
+  include: amazonlinux2.yaml
+  when:
+    - ctags_installed.stdout == ""
+    - ansible_distribution == "Amazon"
+    - ansible_distribution_version == "2"
