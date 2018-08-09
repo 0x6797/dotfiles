@@ -1,0 +1,52 @@
+---
+# tasks file for Ubuntu
+- name: docker | Uninstall old version. (APT)
+  apt:
+    name: "{{ item }}"
+    state: absent
+  become: yes
+  with_items:
+    - docker
+    - docker-engine
+    - docker.io
+
+- name: docker | Ensure installing packages. (APT)
+  apt:
+    name: "{{ item }}"
+    state: present
+  become: yes
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+
+- name: docker | Ensure to register gpg key. (APT)
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  become: yes
+
+- name: docker | Ensure existing apt repository. (APT)
+  apt_repository:
+    repo: "deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+  become: yes
+
+- name: docker | Update repository. (APT)
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: docker | Ensure installing docker-ce (APT)
+  apt:
+    name: docker-ce
+    state: present
+  become: yes
+
+- name: docker | Ensure user joins group Docker.
+  user:
+    name: "{{ ansible_user }}"
+    append: yes
+    group: docker
+  become: yes
+
