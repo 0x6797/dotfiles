@@ -160,6 +160,12 @@ hook_add = '''
   " }}}
 '''
 
+# -------------------------------------
+#  TagBar
+# -------------------------------------
+[[plugins]]
+repo = 'majutushi/tagbar'
+
 # ブランチやタグを指定したいとき
 # [[plugins]]
 # repo = 'delphinus35/typescript-vim'

@@ -1,0 +1,3 @@
+[[plugins]]
+repo = 'zah/nim.vim'
+on_ft = ['nim']
