@@ -164,7 +164,7 @@ hook_add = '''
 #  TagBar
 # -------------------------------------
 [[plugins]]
-repo = 'majutushi/tagbar'
+repo = 'majutsushi/tagbar'
 
 # ブランチやタグを指定したいとき
 # [[plugins]]
