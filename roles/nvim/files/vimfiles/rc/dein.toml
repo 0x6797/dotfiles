@@ -166,6 +166,19 @@ hook_add = '''
 [[plugins]]
 repo = 'majutsushi/tagbar'
 
+# -------------------------------------
+#  vim-easytags
+# -------------------------------------
+[[plugins]]
+repo = 'xolox/vim-easytags'
+depends =['xoloc/vim-misc']
+
+# -------------------------------------
+#  vim-easytags
+# -------------------------------------
+[[plugins]]
+repo = 'xolox/vim-misc'
+
 # ブランチやタグを指定したいとき
 # [[plugins]]
 # repo = 'delphinus35/typescript-vim'
