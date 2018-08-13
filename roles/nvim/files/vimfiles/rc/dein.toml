@@ -179,6 +179,37 @@ depends =['xoloc/vim-misc']
 [[plugins]]
 repo = 'xolox/vim-misc'
 
+# -------------------------------------
+#  wesleych/SrcExpl
+# -------------------------------------
+[[plugins]]
+repo = 'wesleyche/SrcExpl'
+hook_post_update = '''
+if !empty(dein#get('SrcExpl'))
+  " Set refresh time in ms
+  let g:SrcExpl_RefreshTime = 1000
+  " Is update tags when SrcExpl is opend
+  let g:SrcExpl_isUpdateTags = 0
+  " Tag update command
+  let g:SrcExpl_updateTagsCmd = 'ctas --sort=foldcase %'
+  " Update all tags
+  function! g:SrcExpl_updateAllTags()
+    let g:SrcExpl_updateTagsCmd = 'ctags --sort=foldcase -R .'
+    call g:SrcExpl_UpdateTags()
+    call g:SrcExpl_updateTagsCmd = 'ctags --sort=foldcase %'
+  endfunction
+  " Source Explorer Window Height
+  let g:SrcExpl_winHeight = 14
+  " Mapping
+  nn [srce] <Nop>
+  nm <Leader>E [srce]
+  nn <silent> [srce]<CR> :SrcExplToggle<CR>
+  nn <silent> [srce]u :call g:SrcExpl_UpdateTags()<CR>
+  nn <silent> [srce]a :call g:SrcExpl_UpdateAllTags()<CR>
+  nn <silent> [srce]n :call g:SrcExpl_NextDef()<CR>
+  nn <silent> [srce]p :call g:SrcExpl_PrevDef()<CR>
+endif
+'''
 # ブランチやタグを指定したいとき
 # [[plugins]]
 # repo = 'delphinus35/typescript-vim'
