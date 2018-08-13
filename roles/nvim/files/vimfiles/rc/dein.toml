@@ -34,9 +34,9 @@ hook_post_update = '''
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
 
-  dein#add('Shougo/neco-vim')
-  dein#add('Shougo/neco-syntax')
-  dein#add('ujihisa/neco-look')
+  call dein#add('Shougo/neco-vim')
+  call dein#add('Shougo/neco-syntax')
+  call dein#add('ujihisa/neco-look')
   let g:deoplete#enable_at_startup = 1
 '''
 
