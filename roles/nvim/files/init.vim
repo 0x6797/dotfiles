@@ -4,7 +4,7 @@ filetype plugin off
 filetype indent off
 
 " -------------------------------------
-"  Rest augroup
+"  Reset augroup
 " -------------------------------------
 augroup MyAutoCmd
   autocmd!
