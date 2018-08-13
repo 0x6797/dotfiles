@@ -102,3 +102,9 @@ set backspace=indent,eol,start
 if has("path_extra")
   set tags+=tags;
 endif
+
+" -------------------------------------
+"  Set <Esc> to switch terminal mode
+"  to normal mode
+" -------------------------------------
+tnoremap <Esc> <C-\><C-n>
