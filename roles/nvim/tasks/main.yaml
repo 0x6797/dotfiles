@@ -42,3 +42,4 @@
     name: neovim
     executable: pip3
     extra_args: --user
+  environment: "{{ proxy_env }}"

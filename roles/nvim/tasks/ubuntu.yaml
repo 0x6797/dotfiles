@@ -5,19 +5,23 @@
     name: "software-properties-common"
     state: present
   become: yes
+  environment: "{{ proxy_env }}"
 
 - name: nvim | Ensure existing APT repository. (APT)
   apt_repository:
     repo: ppa:neovim-ppa/stable
   become: yes
+  environment: "{{ proxy_env }}"
 
 - name: nvim | Update repository. (APT)
   apt:
     update_cache: yes
   become: yes
+  environment: "{{ proxy_env }}"
 
 - name: nvim | Ensure installing nvim. (APT)
   apt:
     name: neovim
     state: present
   become: yes
+  environment: "{{ proxy_env }}"
