@@ -1,0 +1,34 @@
+---
+# tasks file for Ubuntu
+- name: llvm | Ensure installed llvm (APT)
+  apt:
+    name: llvm
+    state: present
+  become: yes
+  environment: "{{ proxy_env }}"
+
+- name: llvm | Ensure installed llvm-runtime (APT)
+  apt:
+    name: llvm-runtime
+    state: present
+  become: yes
+  environment: "{{ proxy_env }}"
+
+- name: llvm | Ensure installed clang (APT)
+  apt:
+    name: "{{ item }}"
+    state: present
+  become: yes
+  environment: "{{ proxy_env }}"
+  with_items:
+    - clang
+    - clang-format
+    - clang-tidy
+    - clang-tools
+    - lldb
+    - cmake
+    - cmake-curses-gui
+    - cmake-data
+    - cmake-doc
+    - cmake-extras
+
