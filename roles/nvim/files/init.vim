@@ -95,3 +95,10 @@ match ZenkakuSpace /　/
 "  Set BackSpace enabled in insert mode
 " -------------------------------------
 set backspace=indent,eol,start
+
+" -------------------------------------
+"  Recursive search for ctags
+" -------------------------------------
+if has("path_extra")
+  set tags+=tags;
+endif
