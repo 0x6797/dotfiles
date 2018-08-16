@@ -97,6 +97,11 @@ match ZenkakuSpace /　/
 set backspace=indent,eol,start
 
 " -------------------------------------
+"  Enable clipboard
+" -------------------------------------
+set clipboard+=unnamedplus
+
+" -------------------------------------
 "  Recursive search for ctags
 " -------------------------------------
 if has("path_extra")
