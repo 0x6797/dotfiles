@@ -2,4 +2,5 @@
 
 set -eu
 
+ansible-playbook -c local ctags.yaml
 ansible-playbook -c local nvim.yaml
