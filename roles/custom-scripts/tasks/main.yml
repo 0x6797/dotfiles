@@ -1,0 +1,9 @@
+---
+# tasks file for custom-scripts
+- name: custom-scripts | Ensure existing $PATH to custom-scripts bin Directory in .bashrc
+  lineinfile:
+    path: ~/.bashrc
+    state: present
+    regexp: '^export PAHT={{ playbook_dir }}'
+    line: 'export PATH={{ playbook_dir }}/bin:$PATH'
+
