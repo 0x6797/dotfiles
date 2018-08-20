@@ -26,12 +26,14 @@
   become: yes
   environment: "{{ proxy_env }}"
 
-- name: nvim | Ensure installing python3. (APT)
+- name: nvim | Ensure installing python2 and 3. (APT)
   apt:
     name: "{{ item }}"
     state: present
   become: yes
   with_items:
+    - python
+    - pyton-pip
     - python3
     - python3-pip
   environment: "{{ proxy_env }}"

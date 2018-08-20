@@ -37,6 +37,12 @@
     force: yes
     state: link
 
+- name: nvim | Ensure insalling python2 neovim plugin.
+  pip:
+    name: neovim
+    extra_args: --user
+  environment: "{{ proxy_env }}"
+
 - name: nvim | Ensure insalling python3 neovim plugin.
   pip:
     name: neovim
