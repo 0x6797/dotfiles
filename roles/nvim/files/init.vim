@@ -113,3 +113,21 @@ endif
 "  to normal mode
 " -------------------------------------
 tnoremap <Esc> <C-\><C-n>
+
+" -------------------------------------
+"  Move cursor on display lines always
+" -------------------------------------
+setlocal wrap nolinebreak nolist
+set virtualedit=
+setlocal display+=lastline
+noremap  k gk
+noremap  j gj
+noremap  <Up>   gk
+noremap  <Down> gj
+noremap  <Home> g<Home>
+noremap  <End>  g<End>
+inoremap <Up>   <C-o>gk
+inoremap <Down> <C-o>gj
+inoremap <Home> <C-o>g<Home>
+inoremap <End>  <C-o>g<End>
+
