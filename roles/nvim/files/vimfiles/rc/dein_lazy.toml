@@ -15,3 +15,7 @@ hook_add = '''
   let g:clang_vim_exec = 'nvim'
 '''
 
+[[plugins]]
+repo = 'dbgx/lldb.nvim'
+on_ft = ['c', 'cpp']
+

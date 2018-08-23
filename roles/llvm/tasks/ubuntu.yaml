@@ -31,4 +31,11 @@
     - cmake-data
     - cmake-doc
     - cmake-extras
+    - libc++-dev
 
+- name: llvm | Create Symbolic link to lldb
+  file:
+    src: /usr/bin/lldb-server-6.0
+    dest: /usr/bin/lldb-server-6.0.0
+    state: link
+  become: yes

@@ -11,6 +11,9 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - python2
+    - python2-pip
+    - python2-devel
     - cmake
     - python3-devel
     - python3-pip
