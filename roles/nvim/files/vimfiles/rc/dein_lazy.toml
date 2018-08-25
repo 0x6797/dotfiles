@@ -7,11 +7,11 @@ repo = 'justmao945/vim-clang'
 on_ft = ['c', 'cpp']
 hook_add = '''
   let g:clang_auto = 1
-  let g:clang_c_completeopt = 'longest,menuone,preview'
-  let g:clang_cpp_completeopt = 'longest,menuone,preview'
+  let g:clang_c_completeopt = 'longest,preview'
+  let g:clang_cpp_completeopt = 'longest,preview'
 
   let g:clang_check_syntax_auto = 1
-  let g:clang_verbose_pmenu = 0
+  let g:clang_verbose_pmenu = 1
   let g:clang_vim_exec = 'nvim'
 '''
 
