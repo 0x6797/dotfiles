@@ -189,13 +189,13 @@ if !empty(dein#get('SrcExpl'))
   " Source Explorer Window Height
   let g:SrcExpl_winHeight = 14
   " Mapping
-  nn [srce] <Nop>
-  nm <Leader>E [srce]
-  nn <silent> [srce]<CR> :SrcExplToggle<CR>
-  nn <silent> [srce]u :call g:SrcExpl_UpdateTags()<CR>
-  nn <silent> [srce]a :call g:SrcExpl_UpdateAllTags()<CR>
-  nn <silent> [srce]n :call g:SrcExpl_NextDef()<CR>
-  nn <silent> [srce]p :call g:SrcExpl_PrevDef()<CR>
+  nnormap [srce] <Nop>
+  nmap <Leader>E [srce]
+  nnormap <silent> [srce]<CR> :SrcExplToggle<CR>
+  nnormap <silent> [srce]u :call g:SrcExpl_UpdateTags()<CR>
+  nnormap <silent> [srce]a :call g:SrcExpl_UpdateAllTags()<CR>
+  nnormap <silent> [srce]n :call g:SrcExpl_NextDef()<CR>
+  nnormap <silent> [srce]p :call g:SrcExpl_PrevDef()<CR>
 endif
 '''
 # ブランチやタグを指定したいとき
