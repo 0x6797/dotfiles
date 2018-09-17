@@ -1,0 +1,13 @@
+---
+# tasks file for Ubuntu
+- name: doxygen | Ensure installing packages. (APT)
+  apt:
+    name: "{{ item }}"
+    state: present
+  become: yes
+  with_items:
+    - doxygen
+    - graphviz
+    - mscgen
+    - dia
+  environment: "{{ proxy_env }}"

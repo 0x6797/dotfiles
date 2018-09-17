@@ -1,0 +1,12 @@
+---
+# tasks file for doxygen
+- name: doxygen | Check if installing doxygen.
+  shell: which doxygen
+  register: doxygen_installed
+  ignore_errors: yes
+
+- name: doxygen | Install tasks for Ubuntu
+  include: ubuntu.yaml
+  when:
+    - doxygen_installed.stdout == ""
+    - ansible_distribution == "Ubuntu"
