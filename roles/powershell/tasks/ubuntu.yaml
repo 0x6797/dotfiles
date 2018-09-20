@@ -1,0 +1,31 @@
+---
+# tasks file for Ubuntu
+- name: powershell | Ensure to register key. (APT)
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+  become: yes
+  environment: "{{ proxy_env }}"
+
+- name: powershell | Ensure existing apt repository. (APT)
+  get_url:
+    url: "https://packages.microsoft.com/config/ubuntu/18.04/prod.list"
+    dest: /etc/apt/sources.list.d/microsoft.list
+  become: yes
+  when: ansible_distribution_major_version == "18"
+  environment: "{{ proxy_env }}"
+
+- name: powershell | Update repository. (APT)
+  apt:
+    update_cache: yes
+  become: yes
+  environment: "{{ proxy_env }}"
+
+- name: powershell | Ensure installing pwsh
+  apt:
+    name: powershell-preview
+    state: latest
+  become: yes
+  when: ansible_distribution_major_version == "18"
+  environment: "{{ proxy_env }}"
+

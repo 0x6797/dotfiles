@@ -1,0 +1,12 @@
+---
+# tasks file for powershell
+- name: powershell | Check if installing powershell
+  shell: which pwsh
+  register: pwsh_installed
+  ignore_errors: yes
+
+- name: powershell | Install tasks for Ubuntu
+  include: ubuntu.yaml
+  when:
+    - pwsh_installed.stdout == ""
+    - ansible_distribution == "Ubuntu"
