@@ -92,6 +92,13 @@ highlight ZenkakuSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
 match ZenkakuSpace /　/
 
 " -------------------------------------
+"  Highlight columns over 80
+" -------------------------------------
+set textwidth=80
+highlight ColorColumn ctermbg=237 guibg=#2c2d27
+let &colorcolumn=join(range(81,9999),",")
+
+" -------------------------------------
 "  Set BackSpace enabled in insert mode
 " -------------------------------------
 set backspace=indent,eol,start
