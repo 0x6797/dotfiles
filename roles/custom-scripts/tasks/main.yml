@@ -4,6 +4,6 @@
   lineinfile:
     path: ~/.bashrc
     state: present
-    regexp: '^export PAHT={{ playbook_dir }}'
+    regexp: '^export PATH={{ playbook_dir }}'
     line: 'export PATH={{ playbook_dir }}/bin:$PATH'
 
