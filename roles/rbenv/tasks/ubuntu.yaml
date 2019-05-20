@@ -1,0 +1,33 @@
+---
+# tasks file for Ubuntu
+- name: rbenv | Ensure installed git
+  apt:
+    name: git
+    state: present
+  become: yes
+  environment: "{{ proxy_env }}"
+
+- name: rbenv | Clone source codes from GitHub.
+  git:
+    repo: https://github.com/sstephenson/rbenv.git
+    dest: "{{ ansible_env.HOME }}/.rbenv"
+    update: no
+  become: no
+  environment: "{{ proxy_env }}"
+
+- name: rbenv | Ensure rbenv is set in PATH.
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    block: |
+      export PATH="$HOME/.rbenv/bin:$PATH"
+      eval "$(rbenv init -)"
+  become: no
+  environment: "{{ proxy_env }}"
+
+- name: rbenv | Ensure ruby-build installed.
+  git:
+    repo: https://github.com/sstephenson/ruby-build.git
+    dest: "{{ ansible_env.HOME }}/.rbenv/plugins/ruby-build"
+    update: no
+  become: no
+  environment: "{{ proxy_env }}"
