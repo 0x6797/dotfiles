@@ -1,0 +1,32 @@
+---
+# tasks file for Ubuntu
+- name: nodejs | Ensure installed npm and nodejs.
+  apt:
+    name: "{{ item }}"
+    state: present
+  become: yes
+  with_items:
+    - nodejs
+    - npm
+  environment: "{{ proxy_env }}"
+
+- name: nodejs | Ensure installed n.
+  npm:
+    name: n
+    global: yes
+  become: yes
+  environment: "{{ proxy_env }}"
+
+- name: nodejs | Ensure installed node stable.
+  shell: n stable
+  become: yes
+
+- name: nodejs | Purge nodejs and npm from APT.
+  apt:
+    name: "{{ item }}"
+    purge: yes
+  become: yes
+  with_items:
+    - nodejs
+    - npm
+  environment: "{{ proxy_env }}"
