@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -eu
+
+ansible-playbook -c local caps2ctrl.yaml

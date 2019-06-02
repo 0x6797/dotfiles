@@ -1,0 +1,6 @@
+---
+# tasks file for caps2ctrl
+- name: caps2ctrl | Install tasks for Ubuntu
+  include: ubuntu.yaml
+  when:
+    - ansible_distribution == "Ubuntu"

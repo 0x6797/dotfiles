@@ -1,0 +1,4 @@
+---
+- hosts: localhost
+  roles:
+    - caps2ctrl

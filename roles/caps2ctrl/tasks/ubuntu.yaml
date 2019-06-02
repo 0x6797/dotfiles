@@ -1,0 +1,9 @@
+---
+# tasks for Ubuntu
+- name: ctrl2caps | Ensure XKBOPTIONS="ctrl:nocaps"
+  lineinfile:
+    path: /etc/default/keyboard
+    regexp: '^XKBOPTIONS='
+    line: 'XKBOPTIONS="ctrl:nocaps"'
+  become: true
+
