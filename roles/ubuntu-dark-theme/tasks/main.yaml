@@ -1,0 +1,27 @@
+---
+- name: Ubuntu Dark Theme | Add PPA
+  apt_repository:
+    repo: "{{ item }}"
+  become: yes
+  with_items:
+    - ppa:papirus/papirus
+    - ppa:dyatlov-igor/materia-theme
+  environment: "{{ proxy_env }}"
+
+- name: Ubuntu Dark Theme | Update repository(APT)
+  apt:
+    update_cache: yes
+  become: yes
+  environment: "{{ proxy_env }}"
+
+- name: Ubuntu Dark Theme | Get packages
+  apt:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - papirus-icon-theme
+    - materia-gtk-theme
+    - gnome-tweaks
+  environment: "{{ proxy_env }}"
+
