@@ -20,6 +20,7 @@
 - name: nodejs | Ensure installed node stable.
   shell: n stable
   become: yes
+  environment: "{{ proxy_env }}"
 
 - name: nodejs | Purge nodejs and npm from APT.
   apt:
