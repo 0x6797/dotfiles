@@ -5,3 +5,4 @@
     name: exuberant-ctags
     state: present
   become: yes
+  environment: "{{ proxy_env }}"
