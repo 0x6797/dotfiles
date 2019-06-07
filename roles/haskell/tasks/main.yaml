@@ -1,0 +1,7 @@
+---
+# tasks for Haskell
+- name: haskell | Ubuntu
+  include: ubuntu.yaml
+  when:
+    - ansible_distribution == "Ubuntu"
+  
