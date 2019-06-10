@@ -1,3 +1,5 @@
 #!/bin/sh
 
-exec ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox &
+.
+
+~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox &
