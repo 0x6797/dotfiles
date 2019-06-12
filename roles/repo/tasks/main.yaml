@@ -1,0 +1,19 @@
+---
+# tasks file for repo
+- name: repo | Ensure $HOME/.local/bin
+  file:
+    path: ~/.local/bin
+    state: directory
+
+- name: repo | Get files from Google.
+  get_url:
+    url: https://storage.googleapis.com/git-repo-downloads/repo
+    dest: ~/.local/bin/
+    mode: '0553'
+
+- name: repo | Ensure existing $PATH to ~/.local/bin Directory in .bashrc
+  lineinfile:
+    path: ~/.bashrc
+    state: present
+    regexp: '^export PATH=~/.local/bin'
+    line: 'export PATH=~/.local/bin:$PATH'
