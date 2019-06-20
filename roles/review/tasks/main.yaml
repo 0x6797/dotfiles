@@ -20,16 +20,3 @@
     group: "{{ ansible_env.USER }}"
     recurse: yes
   become: yes
-
-- name: Re:View | Install textlint
-  npm:
-    name:   "{{ item  }}"
-    path:   ~/node_modules
-    global: no
-  with_items:
-    - textlint
-    - textlint-rule-preset-ja-technical-writing
-    - textlint-rule-preset-ja-spacing
-    - textlint-plugin-review
-  environment: "{{ proxy_env }}"
-
