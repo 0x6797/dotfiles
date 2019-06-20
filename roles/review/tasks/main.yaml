@@ -1,0 +1,35 @@
+---
+# tasks for Re:View
+- name: Re:Veiw | Install ruby latest
+  shell: rbenv install 2.6.3
+  environment: "{{ proxy_env }}"
+  ignore_errors: yes
+
+- name: Re:Veiw | Switch ruby version
+  shell: rbenv local 2.6.3
+  environment: "{{ proxy_env }}"
+  ignore_errors: yes
+- name: Re:View | Install Re:View
+  shell: gem install review
+  environment: "{{ proxy_env }}"
+
+- name: Re:View | Change owner for node_modules
+  file:
+    path:   ~/.node_modules
+    owner:  "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    recurse: yes
+  become: yes
+
+- name: Re:View | Install textlint
+  npm:
+    name:   "{{ item  }}"
+    path:   ~/node_modules
+    global: no
+  with_items:
+    - textlint
+    - textlint-rule-preset-ja-technical-writing
+    - textlint-rule-preset-ja-spacing
+    - textlint-plugin-review
+  environment: "{{ proxy_env }}"
+

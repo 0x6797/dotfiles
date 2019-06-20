@@ -31,3 +31,10 @@
     update: no
   become: no
   environment: "{{ proxy_env }}"
+
+- name: rbenv | Change permission to /var/lib/gems
+  file:
+    path: /var/lib/gems
+    mode:  01777
+    recurse: yes
+  become: yes

@@ -1,12 +1,6 @@
 ---
 # tasks file for rbenv
-- name: rbenv | Check if installing rbenv
-  shell: which rbenv
-  register: rbenv_installed
-  ignore_errors: yes
-
 - name: rbenv | Install tasks for Ubunts
   include: ubuntu.yaml
   when:
-    - rbenv_installed.stdout == ""
     - ansible_distribution == "Ubuntu"

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+set -eu
+
+ansible-playbook -c local review.yaml
+
