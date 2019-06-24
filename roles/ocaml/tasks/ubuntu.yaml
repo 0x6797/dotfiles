@@ -1,0 +1,13 @@
+---
+# tasks for Ubuntu
+- name: OCaml | Ensure camlp5 installed.
+  shell: opam install camlp5
+  environment: "{{ proxy_env }}"
+
+- name: OCaml | Ensure ocamlfind installed.
+  shell: opam install ocamlfind
+  environment: "{{ proxy_env }}"
+
+- name: OCaml | Ensure num installed.
+  shell: opam install num
+  environment: "{{ proxy_env }}"

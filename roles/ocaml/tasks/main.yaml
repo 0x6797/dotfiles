@@ -1,0 +1,15 @@
+---
+# tasks for OCaml
+- name: OCaml | Switch to 4.07.1
+  shell: opam switch create 4.07.1
+  environment: "{{ proxy_env }}"
+  ignore_errors: yes
+
+- name: OCaml | Reinitialize opam
+  shell: eval $(opam config env)
+  environment: "{{ proxy_env }}"
+
+- name: OCaml | Install tasks for Ubuntu
+  include: ubuntu.yaml
+  when:
+    - ansible_distribution == "Ubuntu"

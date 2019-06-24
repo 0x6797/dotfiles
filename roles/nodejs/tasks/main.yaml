@@ -1,6 +1,6 @@
 ---
 # tasks file for rbenv
-- name: nodejs | Install tasks for Ubunts
+- name: nodejs | Install tasks for Ubuntu
   include: ubuntu.yaml
   when:
     - ansible_distribution == "Ubuntu"

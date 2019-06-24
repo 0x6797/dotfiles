@@ -1,0 +1,24 @@
+---
+# tasks for Ubuntu
+- name: coq | Ensure packages installed(APT).
+  apt:
+    name: "{{ item }}"
+    state: present
+  become: yes
+  environment: "{{ proxy_env }}"
+  with_items:
+    - pkg-config
+    - libgtksourceview2.0-dev
+
+- name: coq | Ensure Coq installed.
+  shell: opam install -y coq.8.9.1
+  environment: "{{ proxy_env }}"
+
+- name: coq | Ensure CoqIDE installed.
+  shell: opam install -y coqide
+  environment: "{{ proxy_env }}"
+
+- name: coq | Ensure SSReflect and MathComp installed.
+  shell: opam install coq-mathcomp-ssreflect
+  environment: "{{ proxy_env }}"
+

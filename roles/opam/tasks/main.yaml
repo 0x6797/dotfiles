@@ -1,0 +1,29 @@
+---
+# tasks for opam
+- name: opam | Install pexpect module.
+  pip:
+    name: pexpect
+
+- name: opam | Make a temporary directory.
+  tempfile:
+    state: directory
+  register: directory
+
+- name: opam | Download the install script.
+  get_url:
+    url: "https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh"
+    dest: "{{ directory.path }}"
+  environment: "{{ proxy_env }}"
+
+- name: opam | Execute the install script.
+  expect:
+    command: "sh {{ directory.path }}/install.sh"
+    responses:
+      '## Where should it be installed ?': "/usr/local/bin"
+  environment: "{{ proxy_env }}"
+
+- name: opam | Install tasks for Ubuntu
+  include: ubuntu.yaml
+  when:
+    - ansible_distribution == "Ubuntu"
+

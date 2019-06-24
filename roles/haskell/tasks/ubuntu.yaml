@@ -12,4 +12,5 @@
 
 - name: haskell | Ensure install Stack
   shell: curl -sSL https://get.haskellstack.org/ | sh
+  ignore_errors: yes
   environment: "{{ proxy_env }}"

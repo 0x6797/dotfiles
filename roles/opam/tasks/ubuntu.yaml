@@ -1,0 +1,23 @@
+---
+# tasks for Ubuntu
+- name:
+  apt:
+    name: "{{ item }}"
+    state: present
+  become: yes
+  environment: "{{ proxy_env }}"
+  with_items:
+    - make
+    - m4
+    - gcc
+    - bubblewrap
+
+- name: opam | Initialize opam.
+  shell: opam init
+
+- name: opam | Add script to .bashrc
+  lineinfile:
+    path: ~/.bashrc
+    regexp: "^eval $(opam env)"
+    line:   "eval $(opam env)"
+
