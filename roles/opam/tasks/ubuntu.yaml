@@ -16,8 +16,9 @@
   shell: opam init
 
 - name: opam | Add script to .bashrc
-  lineinfile:
-    path: ~/.bashrc
-    regexp: "^eval $(opam env)"
-    line:   "eval $(opam env)"
-
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    block: |
+      eval "$(opam env)"
+    marker: "#{mark} ANSIBLE MANAGED BLOCK - opam"
+  become: no
