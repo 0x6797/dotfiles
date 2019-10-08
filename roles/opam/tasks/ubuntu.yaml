@@ -13,7 +13,9 @@
     - bubblewrap
 
 - name: opam | Initialize opam.
-  shell: opam init
+  shell: |
+    eval $(opam env)
+    opam init
 
 - name: opam | Add script to .bashrc
   blockinfile:

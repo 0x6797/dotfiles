@@ -4,6 +4,10 @@
   shell: opam install camlp5
   environment: "{{ proxy_env }}"
 
+- name: OCaml | Ensure conf-m4 installed.
+  shell: opam install conf-m4
+  environment: "{{ proxy_env }}"
+
 - name: OCaml | Ensure ocamlfind installed.
   shell: opam install ocamlfind
   environment: "{{ proxy_env }}"

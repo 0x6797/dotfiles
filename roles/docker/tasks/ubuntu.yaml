@@ -9,6 +9,7 @@
     - docker
     - docker-engine
     - docker.io
+  environment: "{{ proxy_env }}"
 
 - name: docker | Ensure installing packages. (APT)
   apt:
@@ -20,12 +21,14 @@
     - ca-certificates
     - curl
     - software-properties-common
+  environment: "{{ proxy_env }}"
 
 - name: docker | Ensure to register gpg key. (APT)
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
   become: yes
+  environment: "{{ proxy_env }}"
 
 - name: docker | Ensure existing apt repository. (APT)
   apt_repository:
@@ -36,12 +39,14 @@
   apt:
     update_cache: yes
   become: yes
+  environment: "{{ proxy_env }}"
 
 - name: docker | Ensure installing docker-ce (APT)
   apt:
     name: docker-ce
     state: present
   become: yes
+  environment: "{{ proxy_env }}"
 
 - name: docker | Ensure user joins group Docker.
   user:
