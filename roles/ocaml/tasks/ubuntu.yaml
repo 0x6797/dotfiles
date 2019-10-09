@@ -15,3 +15,11 @@
 - name: OCaml | Ensure num installed.
   shell: opam install num
   environment: "{{ proxy_env }}"
+
+- name: OCaml | Ensure utop installed.
+  shell: opam install utop
+  environment: "{{ proxy_env }}"
+
+- name: OCaml | Ensure merlin installed.
+  shell: opam install merlin
+  environment: "{{ proxy_env }}"

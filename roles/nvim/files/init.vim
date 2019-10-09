@@ -138,3 +138,9 @@ inoremap <Down> <C-o>gj
 inoremap <Home> <C-o>g<Home>
 inoremap <End>  <C-o>g<End>
 
+" -------------------------------------
+"  Configuration for OCaml merlin
+" -------------------------------------
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
