@@ -1,0 +1,23 @@
+---
+# tasks for Ubuntu
+- name: jupyter | Ensure install components (APT).
+  apt:
+    name: ["texlive-lang-japanese", "texlive-xetex"]
+    state: present
+  become: yes
+  environment: "{{ proxy_env }}"
+
+- name: jupyter | Ensure install Jupyter Lab.
+  pip:
+    name: jupyterlab
+    executable: pip3
+    extra_args: --user
+    state: present
+  environment: "{{ proxy_env }}"
+
+- name: jupyter | Replace config file.
+  file:
+    src: "{{ role_path }}/files/jupyter_notebook_config.py"
+    dest: ~/.jupyter/jupyter_notebook_config.py
+    force: yes
+    state: file

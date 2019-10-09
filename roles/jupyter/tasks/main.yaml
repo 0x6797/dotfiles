@@ -1,0 +1,6 @@
+---
+# tasks file for jupyter
+- name: jupyter | Ubuntu
+  include: ubuntu.yaml
+  when:
+    - ansible_distribution == "Ubuntu"
