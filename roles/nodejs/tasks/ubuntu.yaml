@@ -31,3 +31,21 @@
     - nodejs
     - npm
   environment: "{{ proxy_env }}"
+
+- name: nodejs | Ensure existing ~/.npm-global directory.
+  file:
+    path: ~/.npm-global
+    state: directory
+
+- name: nodejs | Ensure npm config setting.
+  shell: npm config set prefix '~/.npm-global'
+
+
+- name: nodejs | Ensure ~/.nps-global is set in PATH
+  blockinfile:
+    path: "{{ ansible_env.HOME}}/.bashrc"
+    block: |
+      export PATH="$HOME/.npm-global/bin:$PATH"
+    marker: "#{mark} ANSIBLE MANAGED BLOCK - nodejs"
+  become: no
+  environment: "{{ proxy_env }}"
