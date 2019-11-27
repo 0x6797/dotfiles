@@ -13,8 +13,8 @@ Firstly, install Ansible to your environment.
 $ sudo -E apt install ansible
 
 Or
-
-$ pip install --user ansible
+$ sudo -E apt install python3-pip
+$ pip3 install --user ansible
 ```
 
 ## How to install softwares.
