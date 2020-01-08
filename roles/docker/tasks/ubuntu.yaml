@@ -2,25 +2,16 @@
 # tasks file for Ubuntu
 - name: docker | Uninstall old version. (APT)
   apt:
-    name: "{{ item }}"
+    name: [ "docker", "docker-engine", "docker.io" ]
     state: absent
   become: yes
-  with_items:
-    - docker
-    - docker-engine
-    - docker.io
   environment: "{{ proxy_env }}"
 
 - name: docker | Ensure installing packages. (APT)
   apt:
-    name: "{{ item }}"
+    name: [ "apt-transport-https", "ca-certificates", "curl", "software-properties-common" ]
     state: present
   become: yes
-  with_items:
-    - apt-transport-https
-    - ca-certificates
-    - curl
-    - software-properties-common
   environment: "{{ proxy_env }}"
 
 - name: docker | Ensure to register gpg key. (APT)
@@ -45,6 +36,14 @@
   apt:
     name: docker-ce
     state: present
+  become: yes
+  environment: "{{ proxy_env }}"
+
+- name: docker | Ensur installing docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.25.1/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: '0755'
   become: yes
   environment: "{{ proxy_env }}"
 
