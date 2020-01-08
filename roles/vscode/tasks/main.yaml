@@ -1,0 +1,13 @@
+---
+# tasks file for vscode
+- name: vscode | Check if installing vscode.
+  shell: which code
+  register: vscode_installed
+  ignore_errors: yes
+
+- name: vscode | Install tasks for Ubuntu
+  include: ubuntu.yaml
+  when:
+    - vscode_installed == ""
+    - ansible_distribution == "Ubuntu"
+
