@@ -1,0 +1,33 @@
+---
+# tasks file for Ubuntu
+- name: mono | Ensure existing gpg key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+  become: yes
+  when: proxy_env.http_proxy == ""
+
+- name: mono | Ensure existing gpg key in proxy
+  shell: |
+    gpg --keyserver keyserver.ubuntu.com --keyserver-option http-proxy={{ proxy_env.http_proxy }} --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+    gpg --armor --export 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF | sudo apt-key add -
+  become: yes
+  when: not proxy_env.http_proxy == ""
+  enviromment: "{{ proxy_env }}"
+
+- name: mono | Ensure existing apt repository
+  apt_repository:
+    repo: "deb https://download.mono-project.com/repo/ubuntu stable-{{ansible_distribution_release}} main"
+    filename: mono-official-stable
+  become: yes
+  environment: "{{ proxy_env }}"
+
+- name: mono | Ensure existing mono-devel
+  apt:
+    name: mono-devel
+    state: latest
+    update_cache: yes
+  become: yes
+  environment: "{{ proxy_env }}"
+
+
