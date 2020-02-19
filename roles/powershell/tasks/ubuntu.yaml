@@ -12,7 +12,7 @@
     url: "https://packages.microsoft.com/config/ubuntu/18.04/prod.list"
     dest: /etc/apt/sources.list.d/microsoft.list
   become: yes
-  when: ansible_distribution_major_version == "18"
+  when: ansible_distribution_version == "18.04"
   environment: "{{ proxy_env }}"
 
 - name: powershell | Update repository. (APT)
@@ -23,9 +23,8 @@
 
 - name: powershell | Ensure installing pwsh
   apt:
-    name: powershell-preview
+    name: powershell
     state: latest
   become: yes
-  when: ansible_distribution_major_version == "18"
+  when: ansible_distribution_version == "18.04"
   environment: "{{ proxy_env }}"
-
