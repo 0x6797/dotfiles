@@ -7,6 +7,7 @@
     sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
   become: yes
   environment: "{{ proxy_env }}"
+  when: vscode_installed.stdout == ""
 
 - name: vscode | Ensure installing apt-transport-https
   apt:
@@ -15,6 +16,7 @@
     update_cache: no
   become: yes
   environment: "{{ proxy_env }}"
+  when: vscode_installed.stdout == ""
 
 - name: vscode | Ensure existing code.
   apt:
@@ -26,21 +28,34 @@
 
 - name: vscode | Install extensions.
   shell: |
+    # Vim
     code --install-extension vscodevim.vim
+    # PowerShell
     code --install-extension ms-vscode.PowerShell
+    # EditorConfig
     code --install-extension EditorConfig.EditorConfig
+    # Code Formatter
     code --install-extension esbenp.prettier-vscode
     code --install-extension CoenraadS.bracket-pair-colorizer
     code --install-extension christian-kohler.path-intellisense
     code --install-extension aaron-bond.better-comments
+    # Git
     code --install-extension eamodio.gitlens
     code --install-extension donjayamanne.githistory
     code --install-extension piotrpalarz.vscode-gitignore-generator
+    # Intelli Sense
     code --install-extension VisualStudioExptTeam.vscodeintellicode
+    # Web
     code --install-extension ritwickdey.LiveServer
     code --install-extension Orta.vscode-jest
+    code --install-extension humao.rest-client
+    # TypeScript
     code --install-extension ms-vscode.vscode-typescript-tslint-plugin
+    # Remote
     code --install-extension ms-vscode-remote.vscode-remote-extensionpack
     code --install-extension ms-vscode-remote.remote-ssh-edit
+    # Azure
+    code --install-extension msazurermtools.azurerm-vscode-tools
+    code --install-extension ed-elliott.azure-arm-template-helper
   environment: "{{ proxy_env }}"
 
