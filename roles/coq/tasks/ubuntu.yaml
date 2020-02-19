@@ -2,13 +2,10 @@
 # tasks for Ubuntu
 - name: coq | Ensure packages installed(APT).
   apt:
-    name: "{{ item }}"
+    name: ['pkg-config', 'libgtksourceview2.0-dev']
     state: present
   become: yes
   environment: "{{ proxy_env }}"
-  with_items:
-    - pkg-config
-    - libgtksourceview2.0-dev
 
 - name: coq | Add Coq repository.
   shell: opam repo add coq-released https://coq.inria.fr/opam/released

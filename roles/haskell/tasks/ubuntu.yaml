@@ -2,12 +2,9 @@
 # tasks for Ubuntu
 - name: haskell | Ensure install Haskell
   apt:
-    name: "{{ item }}"
+    name: ['haskell-platform', 'curl']
     state: present
   become: yes
-  with_items:
-    - haskell-platform
-    - curl
   environment: "{{ proxy_env }}"
 
 - name: haskell | Ensure install Stack

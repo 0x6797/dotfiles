@@ -16,22 +16,10 @@
 
 - name: llvm | Ensure installed clang (APT)
   apt:
-    name: "{{ item }}"
+    name: ['clang', 'clang-format', 'clang-tidy', 'clang-tools', 'lldb', 'cmake', 'cmake-curses-gui', 'cmake-data', 'cmake-doc', 'cmake-extras', 'libc++-dev']
     state: present
   become: yes
   environment: "{{ proxy_env }}"
-  with_items:
-    - clang
-    - clang-format
-    - clang-tidy
-    - clang-tools
-    - lldb
-    - cmake
-    - cmake-curses-gui
-    - cmake-data
-    - cmake-doc
-    - cmake-extras
-    - libc++-dev
 
 - name: llvm | Create Symbolic link to lldb
   file:

@@ -8,16 +8,8 @@
 
 - name: nvim | Ensure existing build packages.
   yum:
-    name: "{{ item }}"
+    name: ['cmake', 'python3-devel', 'python3-pip', 'git']
     state: present
-  with_items:
-    - python2
-    - python2-pip
-    - python2-devel
-    - cmake
-    - python3-devel
-    - python3-pip
-    - git
   become: yes
 
 - name: nvim | Make a temporary directory.

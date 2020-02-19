@@ -2,15 +2,10 @@
 # tasks for Ubuntu
 - name:
   apt:
-    name: "{{ item }}"
+    name: ['make', 'm4', 'gcc', 'bubblewrap']
     state: present
   become: yes
   environment: "{{ proxy_env }}"
-  with_items:
-    - make
-    - m4
-    - gcc
-    - bubblewrap
 
 - name: opam | Initialize opam.
   shell: |

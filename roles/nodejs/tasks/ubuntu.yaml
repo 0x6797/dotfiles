@@ -2,12 +2,9 @@
 # tasks file for Ubuntu
 - name: nodejs | Ensure installed npm and nodejs.
   apt:
-    name: "{{ item }}"
+    name: ['nodejs', 'npm']
     state: present
   become: yes
-  with_items:
-    - nodejs
-    - npm
   environment: "{{ proxy_env }}"
 
 - name: nodejs | Ensure installed n.
@@ -24,12 +21,9 @@
 
 - name: nodejs | Purge nodejs and npm from APT.
   apt:
-    name: "{{ item }}"
+    name: ['nodejs', 'npm']
     purge: yes
   become: yes
-  with_items:
-    - nodejs
-    - npm
   environment: "{{ proxy_env }}"
 
 - name: nodejs | Ensure existing ~/.npm-global directory.
