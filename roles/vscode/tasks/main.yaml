@@ -8,6 +8,6 @@
 - name: vscode | Install tasks for Ubuntu
   include: ubuntu.yaml
   when:
-    - vscode_installed == ""
+    - vscode_installed.stdout == ""
     - ansible_distribution == "Ubuntu"
 
